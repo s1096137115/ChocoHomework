@@ -1,20 +1,31 @@
 package tw.com.maxting.chocohomework.data
 
-import kotlinx.serialization.Serializable
-import java.util.*
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Entity(primaryKeys = ["drama_id"])
 @Serializable
 data class Drama(
+    @ColumnInfo(name = "drama_id")
+    @SerialName("drama_id")
     val dramaId: Int,
-    val totalViews: Int,
-    val createdAt: Date,
+    val name: String,
+    @ColumnInfo(name = "total_views")
+    @SerialName("total_views")
+    val totalViews: Long,
+    @ColumnInfo(name = "created_at")
+    @SerialName("created_at")
+    val createdAt: String,
     val thumb: String,
     val rating: Float
 )
 
-//"drama_id": 1,
-//"name": "致我們單純的小美好",
-//"total_views": 23562274,
-//"created_at": "2017-11-23T02:04:39.000Z",
-//"thumb": "https://i.pinimg.com/originals/61/d4/be/61d4be8bfc29ab2b6d5cab02f72e8e3b.jpg",
-//"rating": 4.4526
+
+@Serializable
+data class DramasResponse(
+    val data: List<Drama>
+)
+

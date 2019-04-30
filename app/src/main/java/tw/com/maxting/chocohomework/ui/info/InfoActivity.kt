@@ -1,13 +1,13 @@
-package tw.com.maxting.chocohomework.ui
+package tw.com.maxting.chocohomework.ui.info
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import tw.com.maxting.chocohomework.R
 
-class MainActivity : AppCompatActivity() {
+class InfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_info)
     }
 }
