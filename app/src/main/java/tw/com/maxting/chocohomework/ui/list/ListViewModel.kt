@@ -17,40 +17,37 @@ class ListViewModel constructor(private val repository: Repository) : ViewModel(
         mDisposable.clear()
     }
 
-    val dramas = MutableLiveData<List<Drama>>()
+    val mDramas = MutableLiveData<List<Drama>>()
 
     fun loadDramas() {
         repository
-            .loadDramasFromDb()
-            .subscribeBy(
-                onNext = {
-                    dramas.postValue(it)
-                },
-                onComplete = {
-                    val a = 2
-                },
-                onError = {
-                    val a = 1
-                    //do nothing
-                }
-            )
-            .addTo(mDisposable)
+                .loadDramasFromDb()
+                .subscribeBy(
+                        onNext = {
+                            mDramas.postValue(it)
+                        },
+                        onError = {
+                            val a = 1
+                            //do nothing
+                        }
+                )
+                .addTo(mDisposable)
     }
 
     fun fetchDramas() {
         repository
-            .fetchDramasFromNetwork()
-            .subscribeOn(Schedulers.io())
-            .subscribeBy(
-                onSuccess = {
-                    saveDramas(it.data)
-                },
-                onError = {
-                    val a = 1
-                    //do nothing
-                }
-            )
-            .addTo(mDisposable)
+                .fetchDramasFromNetwork()
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                        onSuccess = {
+                            saveDramas(it.data)
+                        },
+                        onError = {
+                            val a = 1
+                            //do nothing
+                        }
+                )
+                .addTo(mDisposable)
     }
 
     private fun saveDramas(dramas: List<Drama>) {

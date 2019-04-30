@@ -2,10 +2,10 @@ package tw.com.maxting.chocohomework.ui.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import tw.com.maxting.chocohomework.R
 import tw.com.maxting.chocohomework.data.Repository
 import tw.com.maxting.chocohomework.util.getViewModel
+import tw.com.maxting.chocohomework.util.openFragment
 
 class ListActivity : AppCompatActivity() {
 
@@ -17,16 +17,10 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        openFragment(ListFragment.newInstance())
+        supportFragmentManager.openFragment(ListFragment.newInstance())
 
         viewModel.loadDramas()
         viewModel.fetchDramas()
     }
 
-    fun openFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, fragment)
-            .commitAllowingStateLoss()
-    }
 }

@@ -18,13 +18,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.info.InfoActivity"></activity>
-        <activity android:name=".ui.list.ListActivity">
+        <activity
+            android:name=".ui.info.InfoActivity"
+            android:screenOrientation="portrait">
+
+            <tools:validation testUrl="http://www.example.com/drama/1" />
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.example.com"
+                    android:pathPrefix="/drama"
+                    android:scheme="http" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ui.list.ListActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

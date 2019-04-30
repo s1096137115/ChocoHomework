@@ -19,4 +19,7 @@ interface DramaDao {
     @Query("SELECT * FROM Drama")
     fun getAll(): Flowable<List<Drama>>
 
+    @Query("SELECT * FROM Drama WHERE drama_id = :id")
+    fun getDramaById(id: Int): Flowable<Drama>
+
 }

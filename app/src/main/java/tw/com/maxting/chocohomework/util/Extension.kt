@@ -1,8 +1,11 @@
 package tw.com.maxting.chocohomework.util
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import tw.com.maxting.chocohomework.R
 
 inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(crossinline initializer: () -> T): T {
     val viewModelClass = T::class.java
@@ -16,4 +19,10 @@ inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(crossinline 
         }
     }
     return ViewModelProvider(this, factory).get(viewModelClass)
+}
+
+fun FragmentManager.openFragment(fragment: Fragment, containerViewId: Int = R.id.container) {
+    this.beginTransaction()
+            .replace(containerViewId, fragment)
+            .commitAllowingStateLoss()
 }
