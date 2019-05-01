@@ -1,5 +1,7 @@
 package tw.com.maxting.chocohomework.ui.list
 
+import android.app.SearchManager
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import tw.com.maxting.chocohomework.R
@@ -23,4 +25,14 @@ class ListActivity : AppCompatActivity() {
         viewModel.fetchDramas()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        intent
+                ?.takeIf { it.action == Intent.ACTION_SEARCH }
+                ?.let { it.getStringExtra(SearchManager.QUERY) }
+                ?.also { query ->
+                    viewModel.saveRecentQuery(applicationContext, query)
+                }
+    }
 }

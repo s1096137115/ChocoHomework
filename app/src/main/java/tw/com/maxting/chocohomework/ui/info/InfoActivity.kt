@@ -23,20 +23,20 @@ class InfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_info)
 
         handleExtra()
+        handleDeepLinks()
 
         supportFragmentManager.openFragment(InfoFragment.newInstance())
     }
 
-
     private fun handleExtra() {
-        //handle bundle extra
         intent.getIntExtra(DRAMA_ID, -1)
                 .takeIf { it > 0 }
                 ?.also { id ->
                     viewModel.loadDramaById(id)
                 }
+    }
 
-        //handle deep links
+    private fun handleDeepLinks() {
         intent?.data?.path
                 ?.split("/drama/")
                 ?.get(1)

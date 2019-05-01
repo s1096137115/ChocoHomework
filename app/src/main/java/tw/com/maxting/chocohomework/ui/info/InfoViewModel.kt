@@ -26,7 +26,6 @@ class InfoViewModel constructor(private val repository: Repository) : ViewModel(
                             mDrama.postValue(it)
                         },
                         onError = {
-                            val a = 1
                             //do nothing
                         }
                 )

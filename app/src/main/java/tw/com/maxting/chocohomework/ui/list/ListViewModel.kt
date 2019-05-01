@@ -1,5 +1,7 @@
 package tw.com.maxting.chocohomework.ui.list
 
+import android.content.Context
+import android.provider.SearchRecentSuggestions
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -8,6 +10,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import tw.com.maxting.chocohomework.data.Drama
 import tw.com.maxting.chocohomework.data.Repository
+import tw.com.maxting.chocohomework.ui.search.RecentSuggestionProvider
 
 class ListViewModel constructor(private val repository: Repository) : ViewModel() {
     private val mDisposable = CompositeDisposable()
@@ -19,6 +22,8 @@ class ListViewModel constructor(private val repository: Repository) : ViewModel(
 
     val mDramas = MutableLiveData<List<Drama>>()
 
+    val mQuery = MutableLiveData<String>()
+
     fun loadDramas() {
         repository
                 .loadDramasFromDb()
@@ -27,7 +32,6 @@ class ListViewModel constructor(private val repository: Repository) : ViewModel(
                             mDramas.postValue(it)
                         },
                         onError = {
-                            val a = 1
                             //do nothing
                         }
                 )
@@ -43,7 +47,6 @@ class ListViewModel constructor(private val repository: Repository) : ViewModel(
                             saveDramas(it.data)
                         },
                         onError = {
-                            val a = 1
                             //do nothing
                         }
                 )
@@ -52,6 +55,13 @@ class ListViewModel constructor(private val repository: Repository) : ViewModel(
 
     private fun saveDramas(dramas: List<Drama>) {
         repository.saveDramas(dramas)
+    }
+
+    fun saveRecentQuery(context: Context, query: String) {
+        SearchRecentSuggestions(context, RecentSuggestionProvider.AUTHORITY, RecentSuggestionProvider.MODE)
+                .apply { saveRecentQuery(query, null) }
+
+        mQuery.postValue(query)
     }
 
 }
