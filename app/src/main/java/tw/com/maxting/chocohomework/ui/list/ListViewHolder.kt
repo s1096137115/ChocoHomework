@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.item_drama.view.*
 import org.jetbrains.anko.startActivity
 import tw.com.maxting.chocohomework.data.Drama
 import tw.com.maxting.chocohomework.ui.info.InfoActivity
+import tw.com.maxting.chocohomework.util.convertLocalDate
 
 class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     lateinit var mDrama: Drama
@@ -22,7 +23,7 @@ class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.apply {
             tvName.text = drama.name
             tvRating.text = drama.rating.toString()
-            tvCreatedAt.text = drama.createdAt
+            tvCreatedAt.text = drama.createdAt.convertLocalDate()
 
             Glide.with(this)
                     .load(drama.thumb)

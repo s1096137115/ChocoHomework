@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import org.threeten.bp.ZonedDateTime
 import tw.com.maxting.chocohomework.R
 
 inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(crossinline initializer: () -> T): T {
@@ -36,8 +37,8 @@ inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(crossinline 
 
 fun FragmentManager.openFragment(fragment: Fragment, containerViewId: Int = R.id.container) {
     this.beginTransaction()
-            .replace(containerViewId, fragment)
-            .commitAllowingStateLoss()
+        .replace(containerViewId, fragment)
+        .commitAllowingStateLoss()
 }
 
 @ColorInt
@@ -48,7 +49,10 @@ fun Context.getAppThemeColor(elements: Int = R.attr.colorPrimary): Int {
     return result
 }
 
-fun Toolbar.setupItemExpandAnimation(itemId: Int, numberOfMenuIcon: Int = 1, @ColorRes id: Int = android.R.color.white) {
+fun Toolbar.setupItemExpandAnimation(
+    itemId: Int,
+    numberOfMenuIcon: Int = 1, @ColorRes id: Int = android.R.color.white
+) {
 
     if (itemId == R.id.search) {
         val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -60,20 +64,23 @@ fun Toolbar.setupItemExpandAnimation(itemId: Int, numberOfMenuIcon: Int = 1, @Co
     val toolbar = this
 
     val defaultBackgroundColor =
-            if (background is ColorDrawable) {
-                (background as ColorDrawable).color
-            } else {
-                context.getAppThemeColor()
-            }
+        if (background is ColorDrawable) {
+            (background as ColorDrawable).color
+        } else {
+            context.getAppThemeColor()
+        }
 
     var animationFinished = false
 
     fun expandToolbarAnimation(numberOfMenuIcon: Int) {
         toolbar.setBackgroundColor(ContextCompat.getColor(context!!, id)) //animation start toolbar color
 
-        val width = this.width - resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) * numberOfMenuIcon / 2
-        val createCircularReveal = ViewAnimationUtils.createCircularReveal(this,
-                width, this.height / 2, 0.0f, width.toFloat())
+        val width =
+            this.width - resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) * numberOfMenuIcon / 2
+        val createCircularReveal = ViewAnimationUtils.createCircularReveal(
+            this,
+            width, this.height / 2, 0.0f, width.toFloat()
+        )
         createCircularReveal.duration = 350
         createCircularReveal.start()
     }
@@ -81,9 +88,12 @@ fun Toolbar.setupItemExpandAnimation(itemId: Int, numberOfMenuIcon: Int = 1, @Co
     fun collapseToolbarAnimation(numberOfMenuIcon: Int) {
         toolbar.setBackgroundColor(ContextCompat.getColor(context!!, id)) //animation start toolbar color
 
-        val width = this.width - resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) * numberOfMenuIcon / 2
-        val createCircularReveal = ViewAnimationUtils.createCircularReveal(this,
-                width, this.height / 2, width.toFloat(), 0.0f)
+        val width =
+            this.width - resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) * numberOfMenuIcon / 2
+        val createCircularReveal = ViewAnimationUtils.createCircularReveal(
+            this,
+            width, this.height / 2, width.toFloat(), 0.0f
+        )
         createCircularReveal.duration = 350
         createCircularReveal.addListener(object : AnimatorListenerAdapter() {
 
@@ -116,3 +126,5 @@ fun Toolbar.setupItemExpandAnimation(itemId: Int, numberOfMenuIcon: Int = 1, @Co
         }
     })
 }
+
+fun String.convertLocalDate() = ZonedDateTime.parse(this).toLocalDate().toString()

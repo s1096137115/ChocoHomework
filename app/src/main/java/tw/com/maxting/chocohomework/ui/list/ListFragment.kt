@@ -35,8 +35,8 @@ class ListFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
@@ -76,18 +76,18 @@ class ListFragment : Fragment() {
                     when (newText.isEmpty()) {
                         true -> {
                             viewModel.mDramas.value
-                                    ?.also {
-                                        adapter.update(it.toMutableList())
-                                    }
+                                ?.also {
+                                    adapter.update(it.toMutableList())
+                                }
                         }
                         false -> {
                             viewModel.mDramas.value
-                                    ?.filter {
-                                        it.name.contains(newText)
-                                    }
-                                    ?.also {
-                                        adapter.update(it.toMutableList())
-                                    }
+                                ?.filter {
+                                    it.name.contains(newText)
+                                }
+                                ?.also {
+                                    adapter.update(it.toMutableList())
+                                }
                         }
                     }
                     return false

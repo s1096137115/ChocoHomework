@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_info.*
 import tw.com.maxting.chocohomework.R
 import tw.com.maxting.chocohomework.data.Repository
 import tw.com.maxting.chocohomework.util.getViewModel
+import tw.com.maxting.chocohomework.util.convertLocalDate
+import java.time.LocalDate
 
 class InfoFragment : Fragment() {
 
@@ -43,7 +45,7 @@ class InfoFragment : Fragment() {
             mDrama.observe(viewLifecycleOwner, Observer { drama ->
                 tvName.text = "名稱: " + drama.name
                 tvRating.text = "評分: " + drama.rating.toString()
-                tvCreatedAt.text = "出版日期: " + drama.createdAt
+                tvCreatedAt.text = "出版日期: " + drama.createdAt.convertLocalDate()
                 tvTotalViews.text = "觀看次數: " + drama.totalViews.toString()
 
                 Glide.with(this@InfoFragment)
