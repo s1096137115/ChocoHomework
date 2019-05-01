@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Choco Homework</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drama_search_hint">搜尋戲劇…</string>
+    <string name="search_hint">搜尋</string>
 </resources>
