@@ -10,11 +10,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_list.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import tw.com.maxting.chocohomework.R
-import tw.com.maxting.chocohomework.data.Repository
 import tw.com.maxting.chocohomework.ui.search.RecentSuggestionProvider
 import tw.com.maxting.chocohomework.ui.search.SearchSuggestionAdapter
-import tw.com.maxting.chocohomework.util.getViewModel
 import tw.com.maxting.chocohomework.util.setupItemExpandAnimation
 
 
@@ -22,9 +21,11 @@ class ListFragment : Fragment() {
 
     private val adapter = ListAdapter()
 
-    val viewModel by lazy {
-        activity!!.getViewModel { ListViewModel(Repository.getInstance(activity!!.application)) }
-    }
+//    val viewModel by lazy {
+//        activity!!.getViewModel { ListViewModel(Repository.getInstance(activity!!.application)) }
+//    }
+
+    val viewModel: ListViewModel by sharedViewModel()
 
     val searchSuggestionAdapter by lazy {
         SearchSuggestionAdapter(context!!)

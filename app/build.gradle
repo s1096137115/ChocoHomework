@@ -61,4 +61,10 @@ dependencies {
     implementation "org.jetbrains.anko:anko:0.10.8"
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
+
+    // AndroidX (based on koin-android)
+    // Koin AndroidX Scope feature
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    // Koin AndroidX ViewModel feature
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 }

@@ -10,25 +10,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_info.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import tw.com.maxting.chocohomework.R
-import tw.com.maxting.chocohomework.data.Repository
-import tw.com.maxting.chocohomework.util.getViewModel
 import tw.com.maxting.chocohomework.util.convertLocalDate
-import java.time.LocalDate
 
 class InfoFragment : Fragment() {
 
-    val viewModel by lazy {
-        activity!!.getViewModel { InfoViewModel(Repository.getInstance(activity!!.application)) }
-    }
+//    val viewModel by lazy {
+//        activity!!.getViewModel { InfoViewModel(Repository.getInstance(activity!!.application)) }
+//    }
+
+    val viewModel: InfoViewModel by sharedViewModel()
 
     companion object {
         fun newInstance() = InfoFragment()
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info, container, false)
@@ -49,8 +49,8 @@ class InfoFragment : Fragment() {
                 tvTotalViews.text = "觀看次數: " + drama.totalViews.toString()
 
                 Glide.with(this@InfoFragment)
-                        .load(drama.thumb)
-                        .into(ivThumb)
+                    .load(drama.thumb)
+                    .into(ivThumb)
             })
         }
     }
